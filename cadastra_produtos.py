@@ -13,11 +13,9 @@ pyautogui.press("enter")
 pyautogui.write(link)
 pyautogui.press("enter")
 
-sleep(3)
-
 #acessa o primeiro input com a posição obtida no procura.py
 pyautogui.click(x=415, y=378)
-pyautogui.write("qualqueremailparateste@blablabla.com")
+pyautogui.write("qualqueremailparateste@teste.com")
 pyautogui.press("tab")
 pyautogui.write("qualquersenha")
 pyautogui.press("tab")
