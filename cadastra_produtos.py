@@ -1,6 +1,9 @@
 from time import sleep
+from getpass import getpass
 import pyautogui
 import pandas as pd
+import tkinter as tk
+from tkinter import simpledialog
 
 link = "https://dlp.hashtagtreinamentos.com/python/intensivao/login"
 
@@ -15,9 +18,17 @@ pyautogui.press("enter")
 
 #acessa o primeiro input com a posição obtida no procura.py
 pyautogui.click(x=415, y=378)
-pyautogui.write("qualqueremailparateste@teste.com")
+
+# Cria uma janela pop-up para entrada de login e senha
+root = tk.Tk()
+root.withdraw()  # Esconde a janela principal
+
+username = simpledialog.askstring("Login", "Digite o login")
+password = simpledialog.askstring("Senha", "Digite a senha", show='*')
+
+pyautogui.write(username)
 pyautogui.press("tab")
-pyautogui.write("qualquersenha")
+pyautogui.write(password)
 pyautogui.press("tab")
 pyautogui.press("enter")
 
