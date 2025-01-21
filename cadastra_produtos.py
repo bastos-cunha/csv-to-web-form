@@ -1,5 +1,4 @@
 from time import sleep
-from getpass import getpass
 import pyautogui
 import pandas as pd
 import tkinter as tk
@@ -21,7 +20,7 @@ pyautogui.click(x=415, y=378)
 
 # Cria uma janela pop-up para entrada de login e senha
 root = tk.Tk()
-root.withdraw()  # Esconde a janela principal
+root.withdraw()
 
 username = simpledialog.askstring("Login", "Digite o login")
 password = simpledialog.askstring("Senha", "Digite a senha", show='*')
@@ -39,37 +38,14 @@ pyautogui.PAUSE = 0.2
 #loop no index do dataframe e captura as informações com o nome das colunas
 for linha in df.index:
     pyautogui.click(x=409, y=250)
-    
-    codigo = df.loc[linha, "codigo"]
-    pyautogui.write(str(codigo))
-    pyautogui.press("tab")
-    
-    marca = df.loc[linha, "marca"]
-    pyautogui.write(str(marca))
-    pyautogui.press("tab")
 
-    tipo = df.loc[linha, "tipo"]
-    pyautogui.write(str(tipo))
-    pyautogui.press("tab")
+    for coluna in df.columns:
+        if pd.notna(df.loc[linha, coluna]):
+            pyautogui.write(str(df.loc[linha, coluna]))
+            pyautogui.press("tab")
     
-    categoria = df.loc[linha, "categoria"]
-    pyautogui.write(str(categoria))
-    pyautogui.press("tab")
-    
-    preco = df.loc[linha, "preco_unitario"]
-    pyautogui.write(str(preco))
-    pyautogui.press("tab")
-    
-    custo = df.loc[linha, "custo"]
-    pyautogui.write(str(custo))
-    pyautogui.press("tab")
-        
-    obs = df.loc[linha, "obs"]
-    if str(obs).lower() != "nan":
-        pyautogui.write(str(obs))
-    
-    pyautogui.press("tab")
-
     pyautogui.press("enter")
-
     pyautogui.scroll(10000)
+
+qtd = len(df.index)
+pyautogui.alert(f"{qtd} produtos cadastrados com sucesso!")
